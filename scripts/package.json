@@ -1,0 +1,17 @@
+{
+  "name": "sanity-types-sync",
+  "version": "1.0.0",
+  "description": "Scripts to sync Sanity types from GitHub repository",
+  "scripts": {
+    "sync": "node sync-sanity-types.js",
+    "sync:ts": "npx tsx sync-sanity-types.ts",
+    "sync:modern": "node fetch-sanity-types.mjs",
+    "sync:custom": "node sync-sanity-types.js --output-dir"
+  },
+  "type": "module",
+  "dependencies": {},
+  "devDependencies": {
+    "tsx": "^4.0.0",
+    "@types/node": "^20.0.0"
+  }
+}
