@@ -44,7 +44,12 @@ export const enrollmentType = defineType({
 			name: "contentsCompleted",
 			type: "array",
 			group: "progress",
-			of: [defineArrayMember({ type: "reference", to: { type: "lesson" } })],
+			of: [
+				defineArrayMember({
+					type: "reference",
+					to: [{ type: "lesson" }, { type: "quiz" }],
+				}),
+			],
 			description: "Lessons that have been completed by the user",
 		}),
 		defineField({

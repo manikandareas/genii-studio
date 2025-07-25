@@ -1,0 +1,14 @@
+{
+	"blueprintVersion": "2024-10-01",
+	"resources": [
+		{
+			"name": "sync-embedding",
+			"src": "functions/sync-embedding",
+			"type": "sanity.function.document",
+			"event": {
+				"on": ["publish"],
+				"filter": "_type == 'course'"
+			}
+		}
+	]
+}

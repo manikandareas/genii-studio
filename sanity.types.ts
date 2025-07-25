@@ -33,13 +33,20 @@ export type Enrollment = {
     _key: string
     [internalGroqTypeReferenceTo]?: 'course'
   }>
-  contentsCompleted?: Array<{
-    _ref: string
-    _type: 'reference'
-    _weak?: boolean
-    _key: string
-    [internalGroqTypeReferenceTo]?: 'lesson'
-  }>
+  contentsCompleted?: Array<
+    | {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'lesson'
+      }
+    | {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'quiz'
+      }
+  >
   dateCompleted?: string
   percentComplete?: number
 }
