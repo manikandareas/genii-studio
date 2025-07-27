@@ -996,6 +996,65 @@
           ]
         },
         "optional": true
+      },
+      "learningGoals": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "string"
+          }
+        },
+        "optional": true
+      },
+      "studyReason": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "studyPlan": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "level": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "union",
+          "of": [
+            {
+              "type": "string",
+              "value": "beginner"
+            },
+            {
+              "type": "string",
+              "value": "intermediate"
+            },
+            {
+              "type": "string",
+              "value": "advanced"
+            }
+          ]
+        },
+        "optional": true
+      },
+      "studyStreak": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "number"
+        },
+        "optional": true
+      },
+      "streakStartDate": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "number"
+        },
+        "optional": true
       }
     }
   },

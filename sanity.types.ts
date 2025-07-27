@@ -184,6 +184,12 @@ export type User = {
   email?: string
   clerkId?: string
   onboardingStatus?: 'not_started' | 'completed'
+  learningGoals?: Array<string>
+  studyReason?: string
+  studyPlan?: string
+  level?: 'beginner' | 'intermediate' | 'advanced'
+  studyStreak?: number
+  streakStartDate?: number
 }
 
 export type Color = {
