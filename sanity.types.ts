@@ -13,6 +13,29 @@
  */
 
 // Source: schema.json
+export type Recommendation = {
+  _id: string
+  _type: 'recommendation'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  query?: string
+  reason?: string
+  createdFor?: {
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    [internalGroqTypeReferenceTo]?: 'user'
+  }
+  courses?: Array<{
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    _key: string
+    [internalGroqTypeReferenceTo]?: 'course'
+  }>
+}
+
 export type Enrollment = {
   _id: string
   _type: 'enrollment'
@@ -346,6 +369,7 @@ export type SanityAssetSourceData = {
 }
 
 export type AllSanitySchemaTypes =
+  | Recommendation
   | Enrollment
   | Quiz
   | Lesson

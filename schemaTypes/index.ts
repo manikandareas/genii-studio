@@ -5,6 +5,7 @@ import {chapterType} from './chapterType'
 import {lessonType} from './lessonType'
 import {quizType} from './quizType'
 import {enrollmentType} from './enrollmentType'
+import {recommendationType} from './recommendationType'
 
 export const schemaTypes = [
   userType,
@@ -14,4 +15,5 @@ export const schemaTypes = [
   lessonType,
   quizType,
   enrollmentType,
+  recommendationType,
 ]
