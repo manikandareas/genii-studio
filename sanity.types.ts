@@ -13,6 +13,62 @@
  */
 
 // Source: schema.json
+export type ChatMessage = {
+  _id: string
+  _type: 'chatMessage'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  sessions?: Array<{
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    _key: string
+    [internalGroqTypeReferenceTo]?: 'chatSession'
+  }>
+  role?: 'user' | 'assistant'
+  content?: string
+  timestamp?: string
+  status?: 'streaming' | 'completed' | 'error'
+  metadata?: {
+    model?: string
+    tokens?: number
+    requestType?: string
+    processingTime?: number
+  }
+}
+
+export type ChatSession = {
+  _id: string
+  _type: 'chatSession'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  users?: Array<{
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    _key: string
+    [internalGroqTypeReferenceTo]?: 'user'
+  }>
+  lessons?: Array<{
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    _key: string
+    [internalGroqTypeReferenceTo]?: 'lesson'
+  }>
+  sessionId?: string
+  createdAt?: string
+  lastActivity?: string
+  status?: 'active' | 'inactive' | 'ended'
+  metadata?: {
+    userLevel?: string
+    lessonTitle?: string
+    totalMessages?: number
+  }
+}
+
 export type Recommendation = {
   _id: string
   _type: 'recommendation'
@@ -369,6 +425,8 @@ export type SanityAssetSourceData = {
 }
 
 export type AllSanitySchemaTypes =
+  | ChatMessage
+  | ChatSession
   | Recommendation
   | Enrollment
   | Quiz
