@@ -6,6 +6,8 @@ import {lessonType} from './lessonType'
 import {quizType} from './quizType'
 import {enrollmentType} from './enrollmentType'
 import {recommendationType} from './recommendationType'
+import {chatSessionType} from './chatSessionType'
+import {chatMessageType} from './chatMessageType'
 
 export const schemaTypes = [
   userType,
@@ -16,4 +18,6 @@ export const schemaTypes = [
   quizType,
   enrollmentType,
   recommendationType,
+  chatSessionType,
+  chatMessageType,
 ]
