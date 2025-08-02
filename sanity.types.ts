@@ -269,6 +269,7 @@ export type User = {
   level?: 'beginner' | 'intermediate' | 'advanced'
   studyStreak?: number
   streakStartDate?: number
+  delivery_preference?: string
 }
 
 export type Color = {

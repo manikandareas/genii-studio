@@ -117,6 +117,13 @@ export const userType = defineType({
 			group: "study",
 			description: "Timestamp when the current streak started",
 		}),
+		defineField({
+			name: "delivery_preference",
+			type: "string",
+			group: "study",
+			description:
+				"Learning delivery preference, e.g., 'storytelling', 'example-heavy', 'analogy'",
+		}),
 	],
 	preview: {
 		select: {

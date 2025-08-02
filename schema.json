@@ -1547,6 +1547,13 @@
           "type": "number"
         },
         "optional": true
+      },
+      "delivery_preference": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
       }
     }
   },
