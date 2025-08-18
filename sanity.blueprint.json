@@ -7,7 +7,7 @@
 			"type": "sanity.function.document",
 			"event": {
 				"on": ["publish"],
-				"filter": "_type == 'course'"
+				"filter": "_type == 'course' || _type == 'lesson'"
 			}
 		}
 	]

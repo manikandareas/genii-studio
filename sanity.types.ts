@@ -13,6 +13,92 @@
  */
 
 // Source: schema.json
+export type Certificate = {
+  _id: string
+  _type: 'certificate'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  userId?: string
+  userNameAtIssue?: string
+  emailAtIssue?: string
+  course?: Array<{
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    _key: string
+    [internalGroqTypeReferenceTo]?: 'course'
+  }>
+  issuedAt?: string
+  verificationCode?: string
+  asset?: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+    }
+    media?: unknown
+    _type: 'file'
+  }
+  hash?: string
+  status?: 'active' | 'revoked'
+  revocationReason?: string
+}
+
+export type CertificateTemplate = {
+  _id: string
+  _type: 'certificateTemplate'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  background?: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+    }
+    media?: unknown
+    _type: 'file'
+  }
+  fontFiles?: Array<{
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
+    }
+    media?: unknown
+    _type: 'file'
+    _key: string
+  }>
+  placeholders?: {
+    name?: {
+      x?: number
+      y?: number
+      fontSize?: number
+    }
+    courseTitle?: {
+      x?: number
+      y?: number
+      fontSize?: number
+    }
+    issueDate?: {
+      x?: number
+      y?: number
+      fontSize?: number
+    }
+    qr?: {
+      x?: number
+      y?: number
+      size?: number
+    }
+  }
+  paper?: 'A4' | 'Letter'
+}
+
 export type ChatMessage = {
   _id: string
   _type: 'chatMessage'
@@ -209,6 +295,25 @@ export type Course = {
   slug?: Slug
   description?: string
   difficulty?: 'beginner' | 'intermediate' | 'advanced'
+  completionRules?: {
+    requireAllLessons?: boolean
+    requiredQuizzes?: Array<{
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      _key: string
+      [internalGroqTypeReferenceTo]?: 'quiz'
+    }>
+    minAverageScore?: number
+    mustPassFinal?: boolean
+  }
+  certificateTemplate?: Array<{
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    _key: string
+    [internalGroqTypeReferenceTo]?: 'certificateTemplate'
+  }>
   thumbnail?: {
     asset?: {
       _ref: string
@@ -426,6 +531,8 @@ export type SanityAssetSourceData = {
 }
 
 export type AllSanitySchemaTypes =
+  | Certificate
+  | CertificateTemplate
   | ChatMessage
   | ChatSession
   | Recommendation
