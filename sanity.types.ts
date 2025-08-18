@@ -13,115 +13,104 @@
  */
 
 // Source: schema.json
-export type Certificate = {
-  _id: string
-  _type: 'certificate'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  userId?: string
-  userNameAtIssue?: string
-  emailAtIssue?: string
-  course?: Array<{
-    _ref: string
-    _type: 'reference'
-    _weak?: boolean
-    _key: string
-    [internalGroqTypeReferenceTo]?: 'course'
-  }>
-  issuedAt?: string
-  verificationCode?: string
-  asset?: {
-    asset?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
-    }
-    media?: unknown
-    _type: 'file'
-  }
-  hash?: string
-  status?: 'active' | 'revoked'
-  revocationReason?: string
-}
-
-export type CertificateTemplate = {
-  _id: string
-  _type: 'certificateTemplate'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  title?: string
-  background?: {
-    asset?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
-    }
-    media?: unknown
-    _type: 'file'
-  }
-  fontFiles?: Array<{
-    asset?: {
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      [internalGroqTypeReferenceTo]?: 'sanity.fileAsset'
-    }
-    media?: unknown
-    _type: 'file'
-    _key: string
-  }>
-  placeholders?: {
-    name?: {
-      x?: number
-      y?: number
-      fontSize?: number
-    }
-    courseTitle?: {
-      x?: number
-      y?: number
-      fontSize?: number
-    }
-    issueDate?: {
-      x?: number
-      y?: number
-      fontSize?: number
-    }
-    qr?: {
-      x?: number
-      y?: number
-      size?: number
-    }
-  }
-  paper?: 'A4' | 'Letter'
-}
-
 export type ChatMessage = {
   _id: string
   _type: 'chatMessage'
   _createdAt: string
   _updatedAt: string
   _rev: string
-  sessions?: Array<{
+  messageId?: string
+  session?: {
     _ref: string
     _type: 'reference'
     _weak?: boolean
-    _key: string
     [internalGroqTypeReferenceTo]?: 'chatSession'
-  }>
-  role?: 'user' | 'assistant'
-  content?: string
-  timestamp?: string
-  status?: 'streaming' | 'completed' | 'error'
-  metadata?: {
-    model?: string
-    tokens?: number
-    requestType?: string
-    processingTime?: number
   }
+  role?: 'system' | 'user' | 'assistant'
+  metadata?: {
+    custom?: string
+  }
+  parts?: Array<
+    | {
+        type?: string
+        text?: string
+        state?: 'streaming' | 'done'
+        _type: 'textUIPart'
+        _key: string
+      }
+    | {
+        type?: string
+        text?: string
+        state?: 'streaming' | 'done'
+        providerMetadata?: {
+          data?: string
+        }
+        _type: 'reasoningUIPart'
+        _key: string
+      }
+    | {
+        type?: string
+        name?: string
+        toolCallId?: string
+        state?: 'input-streaming' | 'input-available' | 'output-available' | 'output-error'
+        input?: {
+          data?: string
+        }
+        output?: {
+          data?: string
+        }
+        errorText?: string
+        providerExecuted?: boolean
+        _type: 'toolUIPart'
+        _key: string
+      }
+    | {
+        type?: string
+        sourceId?: string
+        url?: string
+        title?: string
+        providerMetadata?: {
+          data?: string
+        }
+        _type: 'sourceUrlUIPart'
+        _key: string
+      }
+    | {
+        type?: string
+        sourceId?: string
+        mediaType?: string
+        title?: string
+        filename?: string
+        providerMetadata?: {
+          data?: string
+        }
+        _type: 'sourceDocumentUIPart'
+        _key: string
+      }
+    | {
+        type?: string
+        mediaType?: string
+        filename?: string
+        url?: string
+        _type: 'fileUIPart'
+        _key: string
+      }
+    | {
+        type?: string
+        name?: string
+        dataId?: string
+        data?: {
+          content?: string
+        }
+        _type: 'dataUIPart'
+        _key: string
+      }
+    | {
+        type?: string
+        _type: 'stepStartUIPart'
+        _key: string
+      }
+  >
 }
 
 export type ChatSession = {
@@ -295,25 +284,6 @@ export type Course = {
   slug?: Slug
   description?: string
   difficulty?: 'beginner' | 'intermediate' | 'advanced'
-  completionRules?: {
-    requireAllLessons?: boolean
-    requiredQuizzes?: Array<{
-      _ref: string
-      _type: 'reference'
-      _weak?: boolean
-      _key: string
-      [internalGroqTypeReferenceTo]?: 'quiz'
-    }>
-    minAverageScore?: number
-    mustPassFinal?: boolean
-  }
-  certificateTemplate?: Array<{
-    _ref: string
-    _type: 'reference'
-    _weak?: boolean
-    _key: string
-    [internalGroqTypeReferenceTo]?: 'certificateTemplate'
-  }>
   thumbnail?: {
     asset?: {
       _ref: string
@@ -531,8 +501,6 @@ export type SanityAssetSourceData = {
 }
 
 export type AllSanitySchemaTypes =
-  | Certificate
-  | CertificateTemplate
   | ChatMessage
   | ChatSession
   | Recommendation

@@ -1,5 +1,14 @@
-import { CommentIcon, CodeIcon, DocumentIcon, LinkIcon, UploadIcon, PlayIcon, BulbOutlineIcon, RobotIcon } from "@sanity/icons";
-import { defineField, defineType, defineArrayMember } from "sanity";
+import {
+	BulbOutlineIcon,
+	CodeIcon,
+	CommentIcon,
+	DocumentIcon,
+	LinkIcon,
+	PlayIcon,
+	RobotIcon,
+	UploadIcon,
+} from "@sanity/icons";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 export const chatMessageType = defineType({
 	name: "chatMessage",
@@ -19,7 +28,8 @@ export const chatMessageType = defineType({
 			title: "Session",
 			type: "reference",
 			to: [{ type: "chatSession" }],
-			validation: (rule) => rule.required().error("Session reference is required"),
+			validation: (rule) =>
+				rule.required().error("Session reference is required"),
 		}),
 		defineField({
 			name: "role",
@@ -73,7 +83,8 @@ export const chatMessageType = defineType({
 							name: "text",
 							type: "text",
 							rows: 4,
-							validation: (rule) => rule.required().error("Text content is required"),
+							validation: (rule) =>
+								rule.required().error("Text content is required"),
 						}),
 						defineField({
 							name: "state",
@@ -91,7 +102,9 @@ export const chatMessageType = defineType({
 						select: { title: "text", subtitle: "type" },
 						prepare({ title, subtitle }) {
 							return {
-								title: title ? title.substring(0, 60) + (title.length > 60 ? "..." : "") : "Text Part",
+								title: title
+									? title.substring(0, 60) + (title.length > 60 ? "..." : "")
+									: "Text Part",
 								subtitle: subtitle,
 								media: DocumentIcon,
 							};
@@ -115,7 +128,8 @@ export const chatMessageType = defineType({
 							name: "text",
 							type: "text",
 							rows: 4,
-							validation: (rule) => rule.required().error("Reasoning text is required"),
+							validation: (rule) =>
+								rule.required().error("Reasoning text is required"),
 						}),
 						defineField({
 							name: "state",
@@ -147,7 +161,9 @@ export const chatMessageType = defineType({
 						select: { title: "text", subtitle: "type" },
 						prepare({ title, subtitle }) {
 							return {
-								title: title ? title.substring(0, 60) + (title.length > 60 ? "..." : "") : "Reasoning Part",
+								title: title
+									? title.substring(0, 60) + (title.length > 60 ? "..." : "")
+									: "Reasoning Part",
 								subtitle: subtitle,
 								media: BulbOutlineIcon,
 							};
@@ -170,13 +186,16 @@ export const chatMessageType = defineType({
 						defineField({
 							name: "name",
 							type: "string",
-							description: "Tool name, e.g. \"getWeather\" → type in UI will be `tool-getWeather`.",
-							validation: (rule) => rule.required().error("Tool name is required"),
+							description:
+								'Tool name, e.g. "getWeather" → type in UI will be `tool-getWeather`.',
+							validation: (rule) =>
+								rule.required().error("Tool name is required"),
 						}),
 						defineField({
 							name: "toolCallId",
 							type: "string",
-							validation: (rule) => rule.required().error("Tool call ID is required"),
+							validation: (rule) =>
+								rule.required().error("Tool call ID is required"),
 						}),
 						defineField({
 							name: "state",
@@ -254,7 +273,8 @@ export const chatMessageType = defineType({
 						defineField({
 							name: "sourceId",
 							type: "string",
-							validation: (rule) => rule.required().error("Source ID is required"),
+							validation: (rule) =>
+								rule.required().error("Source ID is required"),
 						}),
 						defineField({
 							name: "url",
@@ -307,7 +327,8 @@ export const chatMessageType = defineType({
 						defineField({
 							name: "sourceId",
 							type: "string",
-							validation: (rule) => rule.required().error("Source ID is required"),
+							validation: (rule) =>
+								rule.required().error("Source ID is required"),
 						}),
 						defineField({
 							name: "mediaType",
@@ -367,13 +388,15 @@ export const chatMessageType = defineType({
 						defineField({
 							name: "filename",
 							type: "string",
-							validation: (rule) => rule.required().error("Filename is required"),
+							validation: (rule) =>
+								rule.required().error("Filename is required"),
 						}),
 						defineField({
 							name: "url",
 							type: "url",
 							description: "Data URL or hosted URL",
-							validation: (rule) => rule.required().error("File URL is required"),
+							validation: (rule) =>
+								rule.required().error("File URL is required"),
 						}),
 					],
 					preview: {
@@ -403,13 +426,16 @@ export const chatMessageType = defineType({
 						defineField({
 							name: "name",
 							type: "string",
-							description: "Data part name, e.g. \"chart\" → type in UI will be `data-chart`.",
-							validation: (rule) => rule.required().error("Data name is required"),
+							description:
+								'Data part name, e.g. "chart" → type in UI will be `data-chart`.',
+							validation: (rule) =>
+								rule.required().error("Data name is required"),
 						}),
 						defineField({
 							name: "dataId",
 							type: "string",
-							validation: (rule) => rule.required().error("Data ID is required"),
+							validation: (rule) =>
+								rule.required().error("Data ID is required"),
 						}),
 						defineField({
 							name: "data",
@@ -462,13 +488,15 @@ export const chatMessageType = defineType({
 					},
 				}),
 			],
-			validation: (rule) => rule.required().min(1).error("At least one message part is required"),
+			validation: (rule) =>
+				rule.required().min(1).error("At least one message part is required"),
 		}),
 	],
 	preview: {
 		select: { title: "role", subtitle: "messageId" },
 		prepare({ title, subtitle }) {
-			const roleIcon = title === "user" ? "👤" : title === "assistant" ? "🤖" : "⚙️";
+			const roleIcon =
+				title === "user" ? "👤" : title === "assistant" ? "🤖" : "⚙️";
 			return {
 				title: `${roleIcon} ${title}`,
 				subtitle: subtitle,
