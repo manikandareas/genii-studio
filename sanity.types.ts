@@ -205,6 +205,63 @@ export type Enrollment = {
   percentComplete?: number
 }
 
+export type QuizAttempt = {
+  _id: string
+  _type: 'quizAttempt'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  user?: Array<{
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    _key: string
+    [internalGroqTypeReferenceTo]?: 'user'
+  }>
+  quiz?: Array<{
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    _key: string
+    [internalGroqTypeReferenceTo]?: 'quiz'
+  }>
+  course?: Array<{
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    _key: string
+    [internalGroqTypeReferenceTo]?: 'course'
+  }>
+  chapter?: Array<{
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    _key: string
+    [internalGroqTypeReferenceTo]?: 'chapter'
+  }>
+  attemptNumber?: number
+  status?: 'in_progress' | 'submitted' | 'graded'
+  answers?: Array<{
+    questionIndex?: number
+    selectedOptionIndex?: number
+    isOutcome?: 'correct' | 'incorrect'
+    timeTakenMs?: number
+    _type: 'answer'
+    _key: string
+  }>
+  correctCount?: number
+  totalQuestions?: number
+  score?: number
+  percentage?: number
+  startedAt?: string
+  submittedAt?: string
+  durationMs?: number
+  feedback?: string
+  metadata?: {
+    custom?: string
+  }
+}
+
 export type Quiz = {
   _id: string
   _type: 'quiz'
@@ -214,6 +271,7 @@ export type Quiz = {
   title?: string
   slug?: Slug
   description?: string
+  maxAttempt?: number
   questions?: Array<{
     question?: string
     options?: Array<string>
@@ -505,6 +563,7 @@ export type AllSanitySchemaTypes =
   | ChatSession
   | Recommendation
   | Enrollment
+  | QuizAttempt
   | Quiz
   | Lesson
   | Chapter
