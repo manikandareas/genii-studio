@@ -47,18 +47,45 @@ export const recommendationType = defineType({
 			validation: (Rule) =>
 				Rule.required().min(1).error("At least one course must be recommended"),
 		}),
+		defineField({
+			name: "status",
+			title: "Status",
+			type: "string",
+			description: "Processing state of this recommendation request",
+			options: {
+				list: [
+					{ title: "In Progress", value: "in_progress" },
+					{ title: "Completed", value: "completed" },
+					{ title: "Failed", value: "failed" },
+				],
+				layout: "radio",
+			},
+			initialValue: "in_progress",
+			validation: (Rule) => Rule.required().error("Status is required"),
+		}),
+		defineField({
+			name: "message",
+			title: "Message",
+			type: "text",
+			description:
+				"Optional notes or error details when the recommendation process fails",
+			rows: 3,
+			validation: (Rule) =>
+				Rule.max(500).warning("Keep the message under 500 characters"),
+		}),
 	],
 	preview: {
 		select: {
 			title: "query",
 			user: "createdFor.name",
 			count: "courses.length",
+			status: "status",
 		},
 		prepare(selection) {
-			const { title, user, count } = selection;
+			const { title, user, count, status } = selection;
 			return {
 				title: title || "Untitled",
-				subtitle: `For: ${user || "Unknown user"} • ${count || 0} courses`,
+				subtitle: `For: ${user || "Unknown user"} • ${count || 0} courses • ${status || "in_progress"}`,
 			};
 		},
 	},

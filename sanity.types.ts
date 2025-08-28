@@ -165,6 +165,8 @@ export type Recommendation = {
     _key: string
     [internalGroqTypeReferenceTo]?: 'course'
   }>
+  status?: 'in_progress' | 'completed' | 'failed'
+  message?: string
 }
 
 export type Enrollment = {
