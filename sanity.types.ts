@@ -179,6 +179,12 @@ export type Achievement = {
   description?: string
   icon?: string
   category?: 'first_steps' | 'streak' | 'quiz' | 'course' | 'social'
+  course?: {
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    [internalGroqTypeReferenceTo]?: 'course'
+  }
   criteria?: {
     type?: 'lesson_count' | 'quiz_score' | 'course_completion' | 'streak_days' | 'custom'
     target?: number

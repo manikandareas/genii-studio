@@ -59,6 +59,14 @@ export const achievementType = defineType({
 			},
 		}),
 		defineField({
+			name: "course",
+			title: "Course",
+			type: "reference",
+			to: { type: "course" },
+			description:
+				"Optional. Link to a specific course this achievement belongs to.",
+		}),
+		defineField({
 			name: "criteria",
 			title: "Achievement Criteria",
 			type: "object",
