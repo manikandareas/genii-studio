@@ -144,6 +144,79 @@ export type ChatSession = {
   }
 }
 
+export type UserAchievement = {
+  _id: string
+  _type: 'userAchievement'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  user?: {
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    [internalGroqTypeReferenceTo]?: 'user'
+  }
+  achievement?: {
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    [internalGroqTypeReferenceTo]?: 'achievement'
+  }
+  earned?: boolean
+  earnedAt?: string
+  progress?: number
+  notified?: boolean
+}
+
+export type Achievement = {
+  _id: string
+  _type: 'achievement'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  id?: string
+  title?: string
+  description?: string
+  icon?: string
+  category?: 'first_steps' | 'streak' | 'quiz' | 'course' | 'social'
+  criteria?: {
+    type?: 'lesson_count' | 'quiz_score' | 'course_completion' | 'streak_days' | 'custom'
+    target?: number
+    threshold?: number
+  }
+  points?: number
+  isActive?: boolean
+}
+
+export type LearningSession = {
+  _id: string
+  _type: 'learningSession'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  user?: {
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    [internalGroqTypeReferenceTo]?: 'user'
+  }
+  course?: {
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    [internalGroqTypeReferenceTo]?: 'course'
+  }
+  startTime?: string
+  endTime?: string
+  durationMinutes?: number
+  activitiesCompleted?: Array<{
+    type?: 'lesson' | 'quiz' | 'reading'
+    contentId?: string
+    timeSpent?: number
+    _key: string
+  }>
+}
+
 export type Recommendation = {
   _id: string
   _type: 'recommendation'
@@ -405,6 +478,14 @@ export type User = {
   studyStreak?: number
   streakStartDate?: number
   delivery_preference?: string
+  analytics?: {
+    totalXP?: number
+    currentLevel?: number
+    totalStudyTimeMinutes?: number
+    averageSessionTime?: number
+    strongestSkills?: Array<string>
+    improvementAreas?: Array<string>
+  }
 }
 
 export type Color = {
@@ -563,6 +644,9 @@ export type SanityAssetSourceData = {
 export type AllSanitySchemaTypes =
   | ChatMessage
   | ChatSession
+  | UserAchievement
+  | Achievement
+  | LearningSession
   | Recommendation
   | Enrollment
   | QuizAttempt

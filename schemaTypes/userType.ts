@@ -24,6 +24,11 @@ export const userType = defineType({
 			title: "Study",
 			icon: UserIcon,
 		},
+		{
+			name: "analytics",
+			title: "Analytics",
+			icon: UserIcon,
+		},
 	],
 	fields: [
 		defineField({
@@ -123,6 +128,55 @@ export const userType = defineType({
 			group: "study",
 			description:
 				"Learning delivery preference, e.g., 'storytelling', 'example-heavy', 'analogy'",
+		}),
+		defineField({
+			name: "analytics",
+			title: "Learning Analytics",
+			type: "object",
+			group: "analytics",
+			options: { collapsible: true, collapsed: true },
+			fields: [
+				defineField({
+					name: "totalXP",
+					title: "Total Experience Points",
+					type: "number",
+					initialValue: 0,
+					validation: (rule) => rule.min(0),
+				}),
+				defineField({
+					name: "currentLevel",
+					title: "Current Level",
+					type: "number",
+					initialValue: 1,
+					validation: (rule) => rule.min(1),
+				}),
+				defineField({
+					name: "totalStudyTimeMinutes",
+					title: "Total Study Time (Minutes)",
+					type: "number",
+					initialValue: 0,
+					validation: (rule) => rule.min(0),
+				}),
+				defineField({
+					name: "averageSessionTime",
+					title: "Average Session Time (Minutes)",
+					type: "number",
+					initialValue: 0,
+					validation: (rule) => rule.min(0),
+				}),
+				defineField({
+					name: "strongestSkills",
+					title: "Strongest Skills",
+					type: "array",
+					of: [{ type: "string" }],
+				}),
+				defineField({
+					name: "improvementAreas",
+					title: "Areas for Improvement",
+					type: "array",
+					of: [{ type: "string" }],
+				}),
+			],
 		}),
 	],
 	preview: {

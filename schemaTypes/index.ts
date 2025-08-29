@@ -9,6 +9,9 @@ import { quizAttemptType } from "./quizAttemptType";
 import { recommendationType } from "./recommendationType";
 import { topicType } from "./topicType";
 import { userType } from "./userType";
+import { learningSessionType } from "./learningSessionType";
+import { achievementType } from "./achievementType";
+import { userAchievementType } from "./userAchievementType";
 
 export const schemaTypes = [
   userType,
@@ -20,6 +23,9 @@ export const schemaTypes = [
   quizAttemptType,
   enrollmentType,
   recommendationType,
+  learningSessionType,
+  achievementType,
+  userAchievementType,
   chatSessionType,
   chatMessageType,
 ];
