@@ -450,6 +450,13 @@ export type Course = {
     _key: string
     [internalGroqTypeReferenceTo]?: 'chapter'
   }>
+  learningOutcomes?: Array<string>
+  resources?: Array<{
+    label?: string
+    url?: string
+    _type: 'resource'
+    _key: string
+  }>
 }
 
 export type Topic = {

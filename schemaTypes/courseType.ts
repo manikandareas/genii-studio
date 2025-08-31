@@ -111,6 +111,57 @@ export const courseType = defineType({
 			validation: (rule) =>
 				rule.min(1).error("At least one chapter is required"),
 		}),
+		defineField({
+			name: "learningOutcomes",
+			title: "What you will learn",
+			type: "array",
+			group: "content",
+			description: "Key skills and knowledge you will gain from this course",
+			of: [
+				defineArrayMember({
+					type: "string",
+					validation: (rule) => [
+						rule.min(5).warning("Outcome should be at least 5 characters"),
+						rule.max(140).warning("Keep outcomes concise (≤ 140 characters)"),
+					],
+				}),
+			],
+			options: { sortable: true },
+		}),
+		defineField({
+			name: "resources",
+			type: "array",
+			group: "content",
+			description: "External learning resources related to this course",
+			of: [
+				defineArrayMember({
+					type: "object",
+					name: "resource",
+					fields: [
+						defineField({
+							name: "label",
+							type: "string",
+							validation: (rule) => [
+								rule.required().error("Label is required"),
+								rule.min(2).warning("Label should be at least 2 characters"),
+								rule
+									.max(100)
+									.warning("Keep labels concise (≤ 100 characters)"),
+							],
+						}),
+						defineField({
+							name: "url",
+							type: "url",
+							description: "HTTP or HTTPS link to the resource",
+							validation: (rule) => [
+								rule.required().error("URL is required"),
+								rule.uri({ scheme: ["http", "https"] }),
+							],
+						}),
+					],
+				}),
+			],
+		}),
 	],
 	preview: {
 		select: {
