@@ -2295,6 +2295,13 @@
           "type": "string"
         },
         "optional": true
+      },
+      "videoUrl": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
       }
     }
   },

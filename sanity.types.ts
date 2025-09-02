@@ -379,6 +379,7 @@ export type Lesson = {
     [internalGroqTypeReferenceTo]?: 'chapter'
   }>
   content?: string
+  videoUrl?: string
 }
 
 export type Chapter = {
