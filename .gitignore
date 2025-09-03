@@ -33,3 +33,6 @@
 functions/**/.env*
 functions/**/.build/
 functions/**/node_modules/
+
+.env
+.env

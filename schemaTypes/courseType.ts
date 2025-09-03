@@ -162,6 +162,14 @@ export const courseType = defineType({
 				}),
 			],
 		}),
+		defineField({
+			name: "resourcesDigest",
+			type: "string",
+			group: "settings",
+			hidden: true,
+			readOnly: true,
+			description: "System-managed SHA-256 digest of resources array",
+		}),
 	],
 	preview: {
 		select: {

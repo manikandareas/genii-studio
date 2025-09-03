@@ -16,17 +16,18 @@
 		"sanity"
 	],
 	"dependencies": {
+		"@mendable/firecrawl-js": "^4.3.2",
 		"@sanity/client": "^7.8.1",
 		"@sanity/color-input": "^4.0.5",
 		"@sanity/functions": "^1.0.3",
 		"@sanity/icons": "^3.7.4",
-		"@sanity/vision": "^4.6.0",
+		"@sanity/vision": "^4.6.1",
 		"@upstash/vector": "^1.2.2",
 		"dotenv": "^17.2.1",
 		"easymde": "^2.20.0",
 		"react": "^19.1",
 		"react-dom": "^19.1",
-		"sanity": "^4.6.0",
+		"sanity": "^4.6.1",
 		"sanity-plugin-icon-picker": "^4.0.0",
 		"sanity-plugin-markdown": "^5.1.0",
 		"styled-components": "^6.1.18"

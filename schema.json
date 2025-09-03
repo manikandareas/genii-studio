@@ -2767,6 +2767,13 @@
           }
         },
         "optional": true
+      },
+      "resourcesDigest": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
       }
     }
   },

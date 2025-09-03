@@ -5,6 +5,7 @@
 			"name": "sync-embedding",
 			"src": "functions/sync-embedding",
 			"type": "sanity.function.document",
+			"timeout": 120,
 			"event": {
 				"on": ["publish"],
 				"filter": "_type == 'course' || _type == 'lesson'"

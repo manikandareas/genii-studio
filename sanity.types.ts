@@ -458,6 +458,7 @@ export type Course = {
     _type: 'resource'
     _key: string
   }>
+  resourcesDigest?: string
 }
 
 export type Topic = {
