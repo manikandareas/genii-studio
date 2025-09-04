@@ -178,6 +178,54 @@ export const userType = defineType({
 				}),
 			],
 		}),
+		defineField({
+			name: "emailPreferences",
+			title: "Email Preferences",
+			type: "object",
+			group: "settings",
+			options: { collapsible: true, collapsed: true },
+			fields: [
+				defineField({
+					name: "welcomeEmail",
+					type: "boolean",
+					initialValue: true,
+				}),
+				defineField({
+					name: "achievementEmails",
+					type: "boolean",
+					initialValue: true,
+				}),
+				defineField({
+					name: "courseCompletionEmails",
+					type: "boolean",
+					initialValue: true,
+				}),
+				defineField({
+					name: "weeklyDigest",
+					type: "boolean",
+					initialValue: true,
+				}),
+				defineField({ name: "unsubscribedAt", type: "datetime" }),
+			],
+		}),
+		defineField({
+			name: "lastEmailSent",
+			title: "Last Email Sent",
+			type: "datetime",
+			group: "settings",
+		}),
+		defineField({
+			name: "emailStats",
+			title: "Email Statistics",
+			type: "object",
+			group: "settings",
+			options: { collapsible: true, collapsed: true },
+			fields: [
+				defineField({ name: "totalSent", type: "number", initialValue: 0 }),
+				defineField({ name: "totalOpened", type: "number", initialValue: 0 }),
+				defineField({ name: "lastOpenedAt", type: "datetime" }),
+			],
+		}),
 	],
 	preview: {
 		select: {

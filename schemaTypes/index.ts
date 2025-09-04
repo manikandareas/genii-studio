@@ -12,6 +12,7 @@ import { userType } from "./userType";
 import { learningSessionType } from "./learningSessionType";
 import { achievementType } from "./achievementType";
 import { userAchievementType } from "./userAchievementType";
+import { emailNotificationType } from "./emailNotificationType";
 
 export const schemaTypes = [
   userType,
@@ -28,4 +29,5 @@ export const schemaTypes = [
   userAchievementType,
   chatSessionType,
   chatMessageType,
+  emailNotificationType,
 ];

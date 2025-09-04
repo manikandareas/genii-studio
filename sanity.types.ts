@@ -13,6 +13,29 @@
  */
 
 // Source: schema.json
+export type EmailNotification = {
+  _id: string
+  _type: 'emailNotification'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  user?: {
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    [internalGroqTypeReferenceTo]?: 'user'
+  }
+  type?: 'welcome' | 'achievement' | 'courseCompletion' | 'weeklyDigest'
+  subject?: string
+  content?: string
+  sentAt?: string
+  deliveryStatus?: 'sent' | 'delivered' | 'opened' | 'failed'
+  resendId?: string
+  metadata?: {
+    data?: string
+  }
+}
+
 export type ChatMessage = {
   _id: string
   _type: 'chatMessage'
@@ -501,6 +524,19 @@ export type User = {
     strongestSkills?: Array<string>
     improvementAreas?: Array<string>
   }
+  emailPreferences?: {
+    welcomeEmail?: boolean
+    achievementEmails?: boolean
+    courseCompletionEmails?: boolean
+    weeklyDigest?: boolean
+    unsubscribedAt?: string
+  }
+  lastEmailSent?: string
+  emailStats?: {
+    totalSent?: number
+    totalOpened?: number
+    lastOpenedAt?: string
+  }
 }
 
 export type Color = {
@@ -657,6 +693,7 @@ export type SanityAssetSourceData = {
 }
 
 export type AllSanitySchemaTypes =
+  | EmailNotification
   | ChatMessage
   | ChatSession
   | UserAchievement
