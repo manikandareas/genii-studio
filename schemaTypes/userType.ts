@@ -83,19 +83,25 @@ export const userType = defineType({
 		}),
 		defineField({
 			name: "learningGoals",
+			title: "Focus",
 			type: "array",
 			group: "study",
 			of: [{ type: "string" }],
+			options: {
+				layout: "tags"
+			},
 		}),
 		defineField({
 			name: "studyReason",
 			type: "string",
 			group: "study",
+			hidden: true,
 		}),
 		defineField({
 			name: "studyPlan",
 			type: "string",
 			group: "study",
+			hidden: true,
 		}),
 		defineField({
 			name: "level",
@@ -123,11 +129,33 @@ export const userType = defineType({
 			description: "Timestamp when the current streak started",
 		}),
 		defineField({
-			name: "delivery_preference",
+			name: "explanationStyle",
+			title: "Explanation Style",
 			type: "string",
 			group: "study",
 			description:
 				"Learning delivery preference, e.g., 'storytelling', 'example-heavy', 'analogy'",
+		}),
+		defineField({
+			name: "languagePreference",
+			type: "string",
+			group: "study",
+			description: "Preferred language for AI chat",
+			options: {
+				list: [
+					{ title: "Bahasa Indonesia", value: "id" },
+					{ title: "English", value: "en" },
+					{ title: "Mixed", value: "mix" },
+				],
+				layout: "radio",
+			},
+		}),
+		defineField({
+			name: "goal",
+			type: "string",
+			group: "study",
+			description: "Learning goal to sharpen recommendations and chat context",
+			validation: (rule) => rule.max(120).warning("Goal should be concise (max 120 characters)"),
 		}),
 		defineField({
 			name: "analytics",

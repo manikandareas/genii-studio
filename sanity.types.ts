@@ -515,7 +515,9 @@ export type User = {
   level?: 'beginner' | 'intermediate' | 'advanced'
   studyStreak?: number
   streakStartDate?: number
-  delivery_preference?: string
+  explanationStyle?: string
+  languagePreference?: 'id' | 'en' | 'mix'
+  goal?: string
   analytics?: {
     totalXP?: number
     currentLevel?: number

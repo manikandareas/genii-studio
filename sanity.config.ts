@@ -2,6 +2,7 @@ import { colorInput } from "@sanity/color-input";
 import { visionTool } from "@sanity/vision";
 import { defineConfig, useClient } from "sanity";
 import { structureTool } from "sanity/structure";
+import { BulkDelete } from "sanity-plugin-bulk-delete";
 import { markdownSchema } from "sanity-plugin-markdown";
 import { schemaTypes } from "./schemaTypes";
 
@@ -12,7 +13,15 @@ export default defineConfig({
 	projectId: "9ef009ob",
 	dataset: "production",
 
-	plugins: [structureTool(), visionTool(), markdownSchema(), colorInput()],
+	plugins: [
+		structureTool(),
+		visionTool(),
+		markdownSchema(),
+		colorInput(),
+		BulkDelete({
+			schemaTypes,
+		}),
+	],
 	document: {
 		actions: (prev, ctx) =>
 			ctx.schemaType === "chatSession"
