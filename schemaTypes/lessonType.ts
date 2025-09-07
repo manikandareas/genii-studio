@@ -41,8 +41,8 @@ export const lessonType = defineType({
 		}),
 		defineField({
 			name: "content",
-			type: "markdown",
-			description: "Lesson content in markdown format",
+			type: "blockContent",
+			description: "Lesson content in rich text format",
 			validation: (rule) => rule.required().error("Content is required"),
 		}),
 		defineField({

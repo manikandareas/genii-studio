@@ -1,18 +1,19 @@
+import { achievementType } from "./achievementType";
+import { blockContentType } from "./blockContentType";
 import { chapterType } from "./chapterType";
 import { chatMessageType } from "./chatMessageType";
 import { chatSessionType } from "./chatSessionType";
 import { courseType } from "./courseType";
+import { emailNotificationType } from "./emailNotificationType";
 import { enrollmentType } from "./enrollmentType";
+import { learningSessionType } from "./learningSessionType";
 import { lessonType } from "./lessonType";
-import { quizType } from "./quizType";
 import { quizAttemptType } from "./quizAttemptType";
+import { quizType } from "./quizType";
 import { recommendationType } from "./recommendationType";
 import { topicType } from "./topicType";
-import { userType } from "./userType";
-import { learningSessionType } from "./learningSessionType";
-import { achievementType } from "./achievementType";
 import { userAchievementType } from "./userAchievementType";
-import { emailNotificationType } from "./emailNotificationType";
+import { userType } from "./userType";
 
 export const schemaTypes = [
   userType,
@@ -30,4 +31,5 @@ export const schemaTypes = [
   chatSessionType,
   chatMessageType,
   emailNotificationType,
+  blockContentType,
 ];

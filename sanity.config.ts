@@ -1,9 +1,9 @@
 import { colorInput } from "@sanity/color-input";
+import { codeInput } from "@sanity/code-input";
 import { visionTool } from "@sanity/vision";
 import { defineConfig, useClient } from "sanity";
 import { structureTool } from "sanity/structure";
 import { BulkDelete } from "sanity-plugin-bulk-delete";
-import { markdownSchema } from "sanity-plugin-markdown";
 import { schemaTypes } from "./schemaTypes";
 
 export default defineConfig({
@@ -16,7 +16,7 @@ export default defineConfig({
 	plugins: [
 		structureTool(),
 		visionTool(),
-		markdownSchema(),
+		codeInput(),
 		colorInput(),
 		BulkDelete({
 			schemaTypes,
