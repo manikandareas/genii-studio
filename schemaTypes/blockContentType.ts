@@ -1,4 +1,5 @@
 import { defineArrayMember, defineType } from "sanity";
+import { InfoOutlineIcon, WarningOutlineIcon, BulbOutlineIcon, HelpCircleIcon, CheckmarkCircleIcon } from '@sanity/icons';
 
 export const blockContentType = defineType({
 	name: "blockContent",
@@ -63,6 +64,87 @@ export const blockContentType = defineType({
 		}),
 		defineArrayMember({
 			type: "code",
+		}),
+		defineArrayMember({
+			title: "Callout",
+			name: "callout",
+			type: "object",
+			fields: [
+				{
+					name: "type",
+					title: "Type",
+					type: "string",
+					options: {
+						layout: "radio",
+						list: [
+							{ title: "Info", value: "info" },
+							{ title: "Warning", value: "warning" },
+							{ title: "Tip", value: "tip" },
+							{ title: "Quiz", value: "quiz" },
+							{ title: "Important", value: "important" },
+						],
+					},
+					validation: (Rule) => Rule.required(),
+				},
+				{
+					name: "content",
+					title: "Content",
+					type: "array",
+					of: [
+						defineArrayMember({
+							type: "block",
+							styles: [{ title: "Normal", value: "normal" }],
+							marks: {
+								decorators: [
+									{ title: "Strong", value: "strong" },
+									{ title: "Emphasis", value: "em" },
+									{ title: "Code", value: "code" },
+									{ title: "Underline", value: "underline" },
+								],
+							},
+						}),
+					],
+					validation: (Rule) => Rule.required(),
+				},
+			],
+			preview: {
+				select: {
+					type: "type",
+					content: "content",
+				},
+				prepare({ type, content }: { type: string; content?: any[] }) {
+					let title = "";
+					if (content?.[0]?.children) {
+						title = content[0].children
+							.filter((child: any) => child._type === "span")
+							.map((span: any) => span.text)
+							.join("");
+					}
+					
+					// Limit title length
+					if (title.length > 50) {
+						title = title.substring(0, 50) + "...";
+					}
+
+					const typeTitle = type ? type.charAt(0).toUpperCase() + type.slice(1) : "Callout";
+					let icon: React.ComponentType;
+					
+					switch(type) {
+						case "info": icon = InfoOutlineIcon; break;
+						case "warning": icon = WarningOutlineIcon; break;
+						case "tip": icon = BulbOutlineIcon; break;
+						case "quiz": icon = HelpCircleIcon; break;
+						case "important": icon = CheckmarkCircleIcon; break;
+						default: icon = InfoOutlineIcon;
+					}
+					
+					return {
+						title: title || typeTitle + " Callout",
+						subtitle: typeTitle,
+						media: icon
+					};
+				},
+			},
 		}),
 	],
 });
