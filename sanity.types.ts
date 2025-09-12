@@ -71,6 +71,12 @@ export type BlockContent = Array<
       _type: 'callout'
       _key: string
     }
+  | {
+      type?: 'praktek' | 'teori'
+      label?: string
+      _type: 'badge'
+      _key: string
+    }
 >
 
 export type EmailNotification = {

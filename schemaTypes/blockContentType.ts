@@ -1,5 +1,12 @@
+import {
+	BulbOutlineIcon,
+	CheckmarkCircleIcon,
+	HelpCircleIcon,
+	InfoOutlineIcon,
+	TagIcon,
+	WarningOutlineIcon,
+} from "@sanity/icons";
 import { defineArrayMember, defineType } from "sanity";
-import { InfoOutlineIcon, WarningOutlineIcon, BulbOutlineIcon, HelpCircleIcon, CheckmarkCircleIcon } from '@sanity/icons';
 
 export const blockContentType = defineType({
 	name: "blockContent",
@@ -120,28 +127,87 @@ export const blockContentType = defineType({
 							.map((span: any) => span.text)
 							.join("");
 					}
-					
+
 					// Limit title length
 					if (title.length > 50) {
 						title = title.substring(0, 50) + "...";
 					}
 
-					const typeTitle = type ? type.charAt(0).toUpperCase() + type.slice(1) : "Callout";
+					const typeTitle = type
+						? type.charAt(0).toUpperCase() + type.slice(1)
+						: "Callout";
 					let icon: React.ComponentType;
-					
-					switch(type) {
-						case "info": icon = InfoOutlineIcon; break;
-						case "warning": icon = WarningOutlineIcon; break;
-						case "tip": icon = BulbOutlineIcon; break;
-						case "quiz": icon = HelpCircleIcon; break;
-						case "important": icon = CheckmarkCircleIcon; break;
-						default: icon = InfoOutlineIcon;
+
+					switch (type) {
+						case "info":
+							icon = InfoOutlineIcon;
+							break;
+						case "warning":
+							icon = WarningOutlineIcon;
+							break;
+						case "tip":
+							icon = BulbOutlineIcon;
+							break;
+						case "quiz":
+							icon = HelpCircleIcon;
+							break;
+						case "important":
+							icon = CheckmarkCircleIcon;
+							break;
+						default:
+							icon = InfoOutlineIcon;
 					}
-					
+
 					return {
 						title: title || typeTitle + " Callout",
 						subtitle: typeTitle,
-						media: icon
+						media: icon,
+					};
+				},
+			},
+		}),
+		defineArrayMember({
+			title: "Badge",
+			name: "badge",
+			type: "object",
+			fields: [
+				{
+					name: "type",
+					title: "Type",
+					type: "string",
+					options: {
+						layout: "radio",
+						list: [
+							{ title: "Praktek", value: "praktek" },
+							{ title: "Teori", value: "teori" },
+						],
+					},
+					validation: (Rule) => Rule.required(),
+				},
+				{
+					name: "label",
+					title: "Label (Optional)",
+					type: "string",
+					description:
+						"Custom label, jika kosong akan menggunakan type sebagai label",
+					placeholder: "Contoh: Hands-on Practice, Konsep Dasar",
+				},
+			],
+			preview: {
+				select: {
+					type: "type",
+					label: "label",
+				},
+				prepare({ type, label }: { type: string; label?: string }) {
+					const typeTitle = type
+						? type.charAt(0).toUpperCase() + type.slice(1)
+						: "Badge";
+					const displayLabel = label || typeTitle;
+
+					return {
+						title: `Badge: ${displayLabel}`,
+						subtitle: typeTitle,
+						media: TagIcon,
 					};
 				},
 			},
