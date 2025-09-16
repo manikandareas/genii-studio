@@ -77,6 +77,38 @@ export type BlockContent = Array<
       _type: 'badge'
       _key: string
     }
+  | {
+      rows?: Array<{
+        cells?: Array<{
+          content?: Array<{
+            children?: Array<{
+              marks?: Array<string>
+              text?: string
+              _type: 'span'
+              _key: string
+            }>
+            style?: 'normal'
+            listItem?: 'bullet' | 'number'
+            markDefs?: Array<{
+              href?: string
+              _type: 'link'
+              _key: string
+            }>
+            level?: number
+            _type: 'block'
+            _key: string
+          }>
+          isHeader?: boolean
+          _type: 'cell'
+          _key: string
+        }>
+        _type: 'row'
+        _key: string
+      }>
+      caption?: string
+      _type: 'table'
+      _key: string
+    }
 >
 
 export type EmailNotification = {
@@ -547,6 +579,8 @@ export type Course = {
     _type: 'resource'
     _key: string
   }>
+  featured?: boolean
+  readonly?: boolean
   resourcesDigest?: string
 }
 

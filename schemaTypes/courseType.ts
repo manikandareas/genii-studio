@@ -144,9 +144,7 @@ export const courseType = defineType({
 							validation: (rule) => [
 								rule.required().error("Label is required"),
 								rule.min(2).warning("Label should be at least 2 characters"),
-								rule
-									.max(100)
-									.warning("Keep labels concise (≤ 100 characters)"),
+								rule.max(100).warning("Keep labels concise (≤ 100 characters)"),
 							],
 						}),
 						defineField({
@@ -161,6 +159,20 @@ export const courseType = defineType({
 					],
 				}),
 			],
+		}),
+		defineField({
+			name: "featured",
+			type: "boolean",
+			group: "settings",
+			description: "Mark course as featured to highlight it on the platform",
+			initialValue: false,
+		}),
+		defineField({
+			name: "readonly",
+			type: "boolean",
+			group: "settings",
+			description: "Mark course as read-only to prevent enrollment",
+			initialValue: false,
 		}),
 		defineField({
 			name: "resourcesDigest",

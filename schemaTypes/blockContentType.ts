@@ -5,6 +5,7 @@ import {
 	InfoOutlineIcon,
 	TagIcon,
 	WarningOutlineIcon,
+	ThListIcon,
 } from "@sanity/icons";
 import { defineArrayMember, defineType } from "sanity";
 
@@ -208,6 +209,124 @@ export const blockContentType = defineType({
 						title: `Badge: ${displayLabel}`,
 						subtitle: typeTitle,
 						media: TagIcon,
+					};
+				},
+			},
+		}),
+		defineArrayMember({
+			title: "Table",
+			name: "table",
+			type: "object",
+			fields: [
+				{
+					name: "rows",
+					title: "Table Rows",
+					type: "array",
+					of: [
+						defineArrayMember({
+							name: "row",
+							title: "Row",
+							type: "object",
+							fields: [
+								{
+									name: "cells",
+									title: "Cells",
+									type: "array",
+									of: [
+										defineArrayMember({
+											name: "cell",
+											title: "Cell",
+											type: "object",
+											fields: [
+												{
+													name: "content",
+													title: "Content",
+													type: "array",
+													of: [
+														defineArrayMember({
+															type: "block",
+															styles: [{ title: "Normal", value: "normal" }],
+															marks: {
+																decorators: [
+																	{ title: "Strong", value: "strong" },
+																	{ title: "Emphasis", value: "em" },
+																	{ title: "Code", value: "code" },
+																],
+															},
+														}),
+													],
+												},
+												{
+													name: "isHeader",
+													title: "Header Cell",
+													type: "boolean",
+													description: "Mark this cell as a header cell",
+													initialValue: false,
+												},
+											],
+											preview: {
+												select: {
+													content: "content",
+													isHeader: "isHeader",
+												},
+												prepare({ content, isHeader }: { content?: any[]; isHeader?: boolean }) {
+													let text = "";
+													if (content?.[0]?.children) {
+														text = content[0].children
+															.filter((child: any) => child._type === "span")
+															.map((span: any) => span.text)
+															.join("");
+													}
+													
+													if (text.length > 30) {
+														text = text.substring(0, 30) + "...";
+													}
+													
+													return {
+														title: text || "Empty cell",
+														subtitle: isHeader ? "Header" : "Cell",
+													};
+												},
+											},
+										}),
+									],
+								},
+							],
+							preview: {
+								select: {
+									cells: "cells",
+								},
+								prepare({ cells }: { cells?: any[] }) {
+									const cellCount = cells?.length || 0;
+									return {
+										title: `Row with ${cellCount} cell${cellCount !== 1 ? 's' : ''}`,
+										subtitle: "Table Row",
+									};
+								},
+							},
+						}),
+					],
+				},
+				{
+					name: "caption",
+					title: "Table Caption (Optional)",
+					type: "string",
+					description: "Optional caption for the table",
+				},
+			],
+			preview: {
+				select: {
+					rows: "rows",
+					caption: "caption",
+				},
+				prepare({ rows, caption }: { rows?: any[]; caption?: string }) {
+					const rowCount = rows?.length || 0;
+					const cellCount = rows?.[0]?.cells?.length || 0;
+					
+					return {
+						title: caption || `Table (${rowCount}×${cellCount})`,
+						subtitle: `${rowCount} rows, ${cellCount} columns`,
+						media: ThListIcon,
 					};
 				},
 			},
