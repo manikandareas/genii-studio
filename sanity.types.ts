@@ -111,6 +111,24 @@ export type BlockContent = Array<
     }
 >
 
+export type AiArtifact = {
+  _id: string
+  _type: 'aiArtifact'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  userId?: string
+  lesson?: {
+    _ref: string
+    _type: 'reference'
+    _weak?: boolean
+    [internalGroqTypeReferenceTo]?: 'lesson'
+  }
+  sectionKey?: string
+  type?: 'explainer' | 'summary' | 'example' | 'exercise'
+  text?: string
+}
+
 export type EmailNotification = {
   _id: string
   _type: 'emailNotification'
@@ -802,6 +820,7 @@ export type SanityAssetSourceData = {
 
 export type AllSanitySchemaTypes =
   | BlockContent
+  | AiArtifact
   | EmailNotification
   | ChatMessage
   | ChatSession

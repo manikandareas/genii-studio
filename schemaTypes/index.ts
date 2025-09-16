@@ -1,4 +1,5 @@
 import { achievementType } from "./achievementType";
+import { aiArtifactType } from "./aiArtifactType";
 import { blockContentType } from "./blockContentType";
 import { chapterType } from "./chapterType";
 import { chatMessageType } from "./chatMessageType";
@@ -31,5 +32,6 @@ export const schemaTypes = [
   chatSessionType,
   chatMessageType,
   emailNotificationType,
+  aiArtifactType,
   blockContentType,
 ];
